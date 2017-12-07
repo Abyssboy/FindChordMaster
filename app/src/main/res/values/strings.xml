@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">FindChord</string>
+    <string name="ChordAddName">ชื่อคอร์ด</string>
+    <string name="ChordAddLv">ระดับความยาก</string>
+
+
+    <string-array name="ALV">
+        <item>ง่าย</item>
+        <item>ปานกลาง</item>
+        <item>ยาก</item>
+    </string-array>
+
+</resources>
