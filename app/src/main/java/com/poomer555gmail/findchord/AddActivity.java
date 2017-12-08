@@ -98,7 +98,7 @@ mButt = findViewById(R.id.AddButt);
                 if(mSelectedPicFile == null){
                     Toast.makeText(getApplicationContext(),"ยังไม่ได้เลือกรูปภาพ",
                             Toast.LENGTH_LONG).show();
-                    return;//ออกจากmethod
+                    return;
                 }
                 File PrivateDir=   getApplicationContext().getFilesDir();
                 File DstFile = new File(PrivateDir,mSelectedPicFile.getName());
@@ -108,12 +108,11 @@ mButt = findViewById(R.id.AddButt);
                 }catch (IOException e){
                     e.printStackTrace();
                     Log.e(TAG,"Error Copy File");
-                    //ใส่เเจ้งUserตรงนี้
+
                     return;
                 }
                 SaveDataToDB();
                 setResult(RESULT_OK);
-
 
                 finish();
 

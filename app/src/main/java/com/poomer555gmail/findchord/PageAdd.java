@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.poomer555gmail.findchord.Adapter.ChordAdapter;
 import com.poomer555gmail.findchord.DB.DB;
@@ -46,8 +47,11 @@ public class PageAdd extends AppCompatActivity {
                 mChordItem
         );
 
+
         ListView LV = findViewById(R.id.AddAllChordItem);
         LV.setAdapter(mAdapter);
+
+
 
         LV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -106,14 +110,8 @@ public class PageAdd extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 2) {
-            if (requestCode == RESULT_OK) {
-                LoadDataFromDB();
-                mAdapter.notifyDataSetChanged();
-            }
-        }
 
-
+        String re;
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 LoadDataFromDB();
