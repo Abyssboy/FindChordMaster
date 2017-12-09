@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
+<android.support.v4.widget.SwipeRefreshLayout
+    android:id="@+id/RefreshChord"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,6 +22,7 @@
             android:layout_alignParentTop="true" />
     </RelativeLayout>
 
+</android.support.v4.widget.SwipeRefreshLayout>
 
 
 

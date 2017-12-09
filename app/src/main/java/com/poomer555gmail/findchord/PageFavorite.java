@@ -1,12 +1,13 @@
 package com.poomer555gmail.findchord;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -20,18 +21,19 @@ import java.util.ArrayList;
  * Created by poome on 12/3/2017.
  */
 
-public class PageFavorit extends AppCompatActivity {
+public class PageFavorite extends AppCompatActivity {
 
     private DB mHelper;
     private SQLiteDatabase mDB;
 
     private ArrayList<ChordItem> mChordItem = new ArrayList<>();
     private ChordAdapter mAdapter;
+    private SwipeRefreshLayout mRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tabfavorit);
+        setContentView(R.layout.tabfavorite);
 
         mHelper = new DB(this);
         mDB = mHelper.getReadableDatabase();
@@ -44,7 +46,7 @@ public class PageFavorit extends AppCompatActivity {
                 mChordItem
         );
 
-        ListView LV = findViewById(R.id.AllChordItemFavo);
+        final ListView LV = findViewById(R.id.AllChordItemFavo);
         LV.setAdapter(mAdapter);
 
         LV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -54,7 +56,7 @@ public class PageFavorit extends AppCompatActivity {
                 int ID = chordItem.ID ;
 
 
-                Intent intent = new Intent(PageFavorit.this,ChordActivity.class);
+                Intent intent = new Intent(PageFavorite.this,ChordActivity.class);
 
                 intent.putExtra("Position",ID);
                 startActivityForResult(intent,2);
@@ -62,14 +64,47 @@ public class PageFavorit extends AppCompatActivity {
 
             }
         });
+        mRefresh =findViewById(R.id.RefreshFavor);
 
+        mRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshItem();
+            }
+        });
 
+        LV.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
 
+            }
 
-
-
-
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                int topRowVerticalPosition = (LV== null || LV.getChildCount() == 0) ? 0 : LV.getChildAt(0).getTop();
+                mRefresh.setEnabled(firstVisibleItem == 0 && topRowVerticalPosition >= 0);
+            }
+        });
     }
+
+    private void refreshItem() {
+        LoadDataFromDB();
+        mAdapter.notifyDataSetChanged();
+
+        onRefreshCompleted();
+    }
+
+    private void onRefreshCompleted() {
+        mRefresh.setRefreshing(false);
+    }
+
+
+
+
+
+
+
+
 
     private void LoadDataFromDB() {
 

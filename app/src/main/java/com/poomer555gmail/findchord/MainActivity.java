@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
                 .setContent(new Intent(this, PageChord.class));
         TabHost.TabSpec tabSpec3 = tabHost.newTabSpec("tab3")
                 .setIndicator("Favorit")
-                .setContent(new Intent(this, PageFavorit.class));
+                .setContent(new Intent(this, PageFavorite.class));
 
         TabHost.TabSpec tabSpec4 = tabHost.newTabSpec("tab4")
                 .setIndicator("Add")

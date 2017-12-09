@@ -22,9 +22,8 @@
         <activity android:name=".AddActivity" />
         <activity android:name=".ChordActivity"></activity>
 
-        <activity android:name=".PageHome" />
         <activity android:name=".PageChord" />
-        <activity android:name=".PageFavorit" />
+        <activity android:name=".PageFavorite" />
         <activity android:name=".PageAdd" />
     </application>
 
